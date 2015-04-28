@@ -4,9 +4,11 @@
 1.  Use object-oriented Python to model a public library
     (w/ three classes: Library, Shelf, & Book).
     * [repl.it link](http://repl.it/g0T/1)
+    * [GitHub Repo](https://github.com/sjschmidt44/cf_challenge)
 
 2.  Make a simple html page to manage Todos.
     * [jsfiddle link](http://jsfiddle.net/e8eep10p/)
+    * [GitHub Repo](https://github.com/sjschmidt44/cf_challenge)
 
 3. Generate a Django app that allows a user to create, edit, update, and destroy (delete) users:
     * [Heroku link](https://infinite-gorge-2748.herokuapp.com/home/)
