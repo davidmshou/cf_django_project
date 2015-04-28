@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+  <head>
+    <title>Users</title>
+    <link rel="stylesheet" href="{% static "css/reset.css" %}">
+    <link rel="stylesheet" href="{% static "css/layout.css" %}">
+    <link rel="stylesheet" href="{% static "css/style.css" %}">
+  </head>
+  <body>
+    <h1>Current Users</h1>
+    {% if user_list %}
+        {% for user in user_list %}
+      <p>
+        <form action="{% url 'edit' %}" method="post">
+          {% csrf_token %}
+          <input type="text" disabled id="FirstName_{{user.user_id}}" name="firstName" value={{user.first_name}} required>
+          <input type="hidden" value="{{user.first_name}}" name="originalFirstName" id="OriginalFirstName_{{user.user_id}}">
+          <input type="text" disabled id="LastName_{{user.user_id}}" name="lastName" value={{user.last_name}}>
+          <input type="hidden" value="{{user.last_name}}" name="originalLastName" id="OriginalLastName_{{user.user_id}}">
+          <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
+          <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
+          <button id="EditButton_{{user.user_id}}" type="button" onclick="toggleEditable({{user.user_id}})" class="fancyButton">Edit</button>
+          <input type="submit" disabled name="submitButton" value="Update" id="Update_{{user.user_id}}" class="fancyButton">
+          <input type="submit" disabled name="submitButton" value="Delete" id="Delete_{{user.user_id}}" class="fancyButton">
+        </form>
+      </p>
+        {% endfor %}
+        {% else %}
+      <p>No users.</p>
+    {% endif %}
+
+    <h1>Add New User</h1>
+    <form action="{% url 'add' %}" method="post">
+      {% csrf_token %}
+      <label for="firstName">First Name:</label>
+      <input type="text" name="firstName" required>
+      <label for="lastName">Last Name:</label>
+      <input type="text" name="lastName">
+      <label for="email">Email:</label>
+      <input type="email" name="email">
+      <input type="submit" value="Add User" class="fancyButton"><br>
+    </form>
+    <script src="{% static "js/app.css" %}" type="text/javascript"></script>
+  </body>
+</html>

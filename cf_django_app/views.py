@@ -1,8 +1,36 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse
+from django.template import RequestContext, loader
+from django.core.urlresolvers import reverse
 
+from cf_django_app.models import User
+
+#index.html for the app is served here
 def index(request):
-    return HttpResponse("Scott says hey there world! <br /><a href='/home/about'>About</a>")
+    user_list = User.objects.all()
+    template = loader.get_template('cf_django_app/index.html')
+    context = RequestContext(request, {
+        'user_list': user_list,
+        })
+    return HttpResponse(template.render(context))
 
-def about(request):
-    return HttpResponse("Scott says hey this is about me! <br /><a href='/home/'>Home</a>")
+#New user adds are processed here
+def add(request):
+    newUser = User(first_name=request.POST['firstName'],
+                   last_name=request.POST['lastName'],
+                   email=request.POST['email'],)
+    newUser.save()
+    return HttpResponseRedirect(reverse('index'))
+
+#Updates and Deletes to existing records are processed here
+def edit(request):
+    user = User.objects.get(email=request.POST['originalEmail'])
+    if request.POST['submitButton'] == 'Update':
+        user.first_name = request.POST['firstName']
+        user.last_name = request.POST['lastName']
+        user.email = request.POST['email']
+        user.save()
+    elif request.POST['submitButton'] == 'Delete':
+        user.delete()
+
+    return HttpResponseRedirect(reverse('index'))
