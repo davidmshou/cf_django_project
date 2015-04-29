@@ -15,9 +15,8 @@ select {
   color: #4c4c4c;
 }
 
-p {
+section {
   font-size: 12px;
-  width: 150px;
   display: inline-block;
   margin-left: 18px;
 }

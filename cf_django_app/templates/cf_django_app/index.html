@@ -13,7 +13,7 @@
     <h1>Current Users</h1>
     {% if user_list %}
         {% for user in user_list %}
-      <p>
+      <section>
         <form action="{% url 'edit' %}" method="post">
           {% csrf_token %}
           <input type="text" disabled id="FirstName_{{user.user_id}}" name="firstName" value={{user.first_name}} required>
@@ -23,16 +23,16 @@
           <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
           <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
           <button id="EditButton_{{user.user_id}}" type="button" onclick="toggleEditable({{user.user_id}})">Edit</button>
-          <input style='display:none;' type="submit" name="submitButton" value="Update" id="Update_{{user.user_id}}">
-          <input style='display:none;' type="submit" name="submitButton" value="Delete" id="Delete_{{user.user_id}}">
+          <button style='display:none;' type="submit" name="submitButton" id="Update_{{user.user_id}}">Update</button>
+          <button style='display:none;' type="submit" name="submitButton" id="Delete_{{user.user_id}}">Delete</button>
         </form>
-      </p>
+      </section>
         {% endfor %}
         {% else %}
       <p>No users.</p>
     {% endif %}
     <h1>Add New User</h1>
-    <p>
+    <section>
       <form action="{% url 'add' %}" method="post">
         {% csrf_token %}
         <label for="firstName">First Name:</label>
@@ -43,7 +43,7 @@
         <input type="email" name="email">
         <input type="submit" value="Add User">
       </form>
-    </p>
+    </section>
     <script src="{% static "js/app.js" %}" type="text/javascript"></script>
   </body>
 </html>
