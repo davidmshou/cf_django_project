@@ -22,9 +22,9 @@
           <input type="hidden" value="{{user.last_name}}" name="originalLastName" id="OriginalLastName_{{user.user_id}}">
           <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
           <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
-          <button id="EditButton_{{user.user_id}}" type="button" onclick="toggleEditable({{user.user_id}})">Edit</button>
-          <button style='display:none;' type="submit" name="submitButton" id="Update_{{user.user_id}}">Update</button>
-          <button style='display:none;' type="submit" name="submitButton" id="Delete_{{user.user_id}}">Delete</button>
+          <button type="button" onclick="toggleEditable({{user.user_id}})" id="EditButton_{{user.user_id}}">Edit</button>
+          <input style='display:none;' type="submit" name="submitButton" value="Update" id="Update_{{user.user_id}}">
+          <input style='display:none;' type="submit" name="submitButton" value="Delete" id="Delete_{{user.user_id}}">
         </form>
       </section>
         {% endfor %}
