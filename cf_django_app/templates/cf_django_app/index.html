@@ -23,6 +23,8 @@
             <input type="hidden" value="{{user.last_name}}" name="originalLastName" id="OriginalLastName_{{user.user_id}}">
             <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
             <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
+            <textarea type="text" disabled id="Comment_{{user.user_id}}" name="comment">{{user.comment}}</textarea>
+            <textarea style='display:none' name="originalComment" id="OriginalComment_{{user.user_id}}">{{user.comment}}</textarea>
             <button type="button" onclick="toggleEditable({{user.user_id}})" id="EditButton_{{user.user_id}}">Edit</button>
             <button style='display:none;' type="submit" name="submitButton" value="Update" id="Update_{{user.user_id}}">Update</button>
             <button style='display:none;' type="submit" name="submitButton" value="Delete" id="Delete_{{user.user_id}}">Delete</button>
@@ -30,7 +32,7 @@
         </section>
           {% endfor %}
           {% else %}
-        <p>No users.</p>
+        <h1>No users.</h1>
       {% endif %}
     </section>
     <section class='usr'>
@@ -44,6 +46,8 @@
           <input type="text" name="lastName">
           <label for="email">Email:</label>
           <input type="email" name="email">
+          <label for="comment">Comment:</label>
+          <input type="text" name="comment">
           <input type="submit" value="Add User">
         </form>
       </section>
