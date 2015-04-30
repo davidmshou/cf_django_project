@@ -21,6 +21,12 @@ section {
   margin-left: 18px;
 }
 
+.usr {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 h1 {
   font-size: 32px;
   font-weight: 300;

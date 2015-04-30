@@ -10,39 +10,43 @@
     <link rel="stylesheet" href="{% static "css/style.css" %}">
   </head>
   <body>
-    <h1>Current Users</h1>
-    {% if user_list %}
-        {% for user in user_list %}
+    <section class='usr'>
+      <h1>Current Users</h1>
+      {% if user_list %}
+          {% for user in user_list %}
+        <section>
+          <form action="{% url 'edit' %}" method="post">
+            {% csrf_token %}
+            <input type="text" disabled id="FirstName_{{user.user_id}}" name="firstName" value={{user.first_name}} required>
+            <input type="hidden" value="{{user.first_name}}" name="originalFirstName" id="OriginalFirstName_{{user.user_id}}">
+            <input type="text" disabled id="LastName_{{user.user_id}}" name="lastName" value={{user.last_name}}>
+            <input type="hidden" value="{{user.last_name}}" name="originalLastName" id="OriginalLastName_{{user.user_id}}">
+            <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
+            <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
+            <button type="button" onclick="toggleEditable({{user.user_id}})" id="EditButton_{{user.user_id}}">Edit</button>
+            <button style='display:none;' type="submit" name="submitButton" value="Update" id="Update_{{user.user_id}}">Update</button>
+            <button style='display:none;' type="submit" name="submitButton" value="Delete" id="Delete_{{user.user_id}}">Delete</button>
+          </form>
+        </section>
+          {% endfor %}
+          {% else %}
+        <p>No users.</p>
+      {% endif %}
+    </section>
+    <section class='usr'>
+      <h1>Add New User</h1>
       <section>
-        <form action="{% url 'edit' %}" method="post">
+        <form action="{% url 'add' %}" method="post">
           {% csrf_token %}
-          <input type="text" disabled id="FirstName_{{user.user_id}}" name="firstName" value={{user.first_name}} required>
-          <input type="hidden" value="{{user.first_name}}" name="originalFirstName" id="OriginalFirstName_{{user.user_id}}">
-          <input type="text" disabled id="LastName_{{user.user_id}}" name="lastName" value={{user.last_name}}>
-          <input type="hidden" value="{{user.last_name}}" name="originalLastName" id="OriginalLastName_{{user.user_id}}">
-          <input type="email" disabled id="Email_{{user.user_id}}" name="email" value={{user.email}}>
-          <input type="hidden" value="{{user.email}}" name="originalEmail" id="OriginalEmail_{{user.user_id}}">
-          <button type="button" onclick="toggleEditable({{user.user_id}})" id="EditButton_{{user.user_id}}">Edit</button>
-          <input style='display:none;' type="submit" name="submitButton" value="Update" id="Update_{{user.user_id}}">
-          <input style='display:none;' type="submit" name="submitButton" value="Delete" id="Delete_{{user.user_id}}">
+          <label for="firstName">First Name:</label>
+          <input type="text" name="firstName" required>
+          <label for="lastName">Last Name:</label>
+          <input type="text" name="lastName">
+          <label for="email">Email:</label>
+          <input type="email" name="email">
+          <input type="submit" value="Add User">
         </form>
       </section>
-        {% endfor %}
-        {% else %}
-      <p>No users.</p>
-    {% endif %}
-    <h1>Add New User</h1>
-    <section>
-      <form action="{% url 'add' %}" method="post">
-        {% csrf_token %}
-        <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" required>
-        <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName">
-        <label for="email">Email:</label>
-        <input type="email" name="email">
-        <input type="submit" value="Add User">
-      </form>
     </section>
     <script src="{% static "js/app.js" %}" type="text/javascript"></script>
   </body>

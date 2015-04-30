@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 
 from cf_django_app.models import User
 
+
 def index(request):
     user_list = User.objects.all()
     template = loader.get_template('cf_django_app/index.html')
@@ -13,12 +14,14 @@ def index(request):
         })
     return HttpResponse(template.render(context))
 
+
 def add(request):
     newUser = User(first_name=request.POST['firstName'],
                    last_name=request.POST['lastName'],
                    email=request.POST['email'],)
     newUser.save()
     return HttpResponseRedirect(reverse('index'))
+
 
 def edit(request):
     user = User.objects.get(email=request.POST['originalEmail'])

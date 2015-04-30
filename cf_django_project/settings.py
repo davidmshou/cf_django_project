@@ -14,6 +14,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# SS: Template and Static paths for use with dynamic paths further down
 TEMPLATE_PATH = os.path.join(BASE_DIR, 'templates')
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 
@@ -38,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'cf_django_app',
+    'cf_django_app',  # SS: This notifies Django of our app; models, etc.
 )
 
 MIDDLEWARE_CLASSES = (
@@ -70,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+# SS: Dynamic path assignments to direct views/URLs
 TEMPLATE_DIRS = (TEMPLATE_PATH,)
 STATICFILES_DIRS = (STATIC_PATH,)
 
