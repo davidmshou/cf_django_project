@@ -21,6 +21,10 @@ section {
   margin-left: 18px;
 }
 
+button {
+  margin-top: 1rem;
+}
+
 .usr {
   width: 80%;
   margin-left: 10%;
